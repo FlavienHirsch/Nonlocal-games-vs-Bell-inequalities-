@@ -1,5 +1,12 @@
 %% Construct a simple violation of F_\star^1 and F_\star^2
 
+%Scenario 
+
+Inputs = [2 2]
+
+Outputs = [4 4]
+
+
 
 %Pauli matrices:
 
@@ -21,13 +28,13 @@ P_y = [sin(ph(1)) 0  cos(ph(1)) ; sin(ph(2)) 0  cos(ph(2)) ]; %B's Bloch vectors
 %2-outcome projective measurements:
 PA = zeros(2,2,4,2);
 for x=1:2
-PA(:,:,1,x) = .5*(eye(2) + P_x(x,1)*X + P_x(x,2)*Y + P_x(x,1)*Z ); % PA_{0|x} is the projector with Bloch vector P_x(x,:)
+PA(:,:,1,x) = .5*(eye(2) + P_x(x,1)*X + P_x(x,2)*Y + P_x(x,3)*Z ); % PA_{0|x} is the projector with Bloch vector P_x(x,:)
 PA(:,:,2,x) = eye(2) - PA(:,:,1,x); % PA_{1|x} = 1 - PA_{0|x} 
 end
 
 PB= zeros(2,2,4,2);
 for y=1:2
-PB(:,:,1,y) = .5*(eye(2) + P_y(y,1)*X + P_y(y,2)*Y + P_y(y,1)*Z ); % PB_{0|y} is the projector with Bloch vector P_y(y,:)
+PB(:,:,1,y) = .5*(eye(2) + P_y(y,1)*X + P_y(y,2)*Y + P_y(y,3)*Z ); % PB_{0|y} is the projector with Bloch vector P_y(y,:)
 PB(:,:,2,y) = eye(2) - PB(:,:,1,y); % PB_{1|x} = 1 - PB_{0|x} 
 end
 
@@ -63,19 +70,20 @@ end
 
 %% G visibility 
 
+load('Vertices_F_star_1.mat')
 
 
 pN = sum(Vertices_F_star1,5)/size(Vertices_F_star1,5);  %Equal mixture of all vertices of F_\star^1
 
-vis = .042 %choose weight of 'pQ'
+vis = .041 %choose weight of 'pQ'
 
 pT = vis*pQ+(1-vis)*pN; %pT = vis*pQ + (1-vis)*1/N*sum_k V_k , where V_k are vertices of F_star^1
 
 
-[cStar,G] = MILP_max_gap_Game_pT_canonicalLP(pT);  %compute the max violation of pT over all (deterministic) nonlocal games
+[cStar,G] = MILP_max_gap_Game_pT(pT);  %compute the max violation of pT over all (deterministic) nonlocal games
 
 
-gap_pT = cStar  %if 'gap_pT' > 10^-7 one can check that pT violates a (deterministic) nonlocal games, otherwise, pT is likely in G (the set of game-classical behaviours) 
+gap_pT = cStar  %if >10^-8 one can check that pT violates a (deterministic) nonlocal games, otherwise, pT is likely in G (the set of game-classical behaviours) 
 
 
 
