@@ -37,7 +37,7 @@ This repository provides:
 | `Game_representation_31_FacetInequalities_2244.mat` | A nonlocal-game representative $(\mu, V)$ for each of them. |
 | `Jstar.mat` | The game-inequivalent facet $J_\star$ of $(4,4,2,2)$ (Eqs. (7), (C1)). |
 | `F_star_1.mat`, `F_star_2.mat` | The game-inequivalent facets $F^1_\star$, $F^2_\star$ of $(2,2,4,4)$ (Eqs. (8)–(9), (D1)–(D2)). |
-| `Lifted_F_star_game_5522.mat` | A nonlocal game $(\mu, V)$ in $(5,5,2,2)$ equivalent to the input-lifted $J_\star$. |
+| `Lifted_J_star_game_5522.mat` | A nonlocal game $(\mu, V)$ in $(5,5,2,2)$ equivalent to the input-lifted $J_\star$. |
 | `Vertices_F_star_1.mat` | The 56 local deterministic behaviours saturating $F^1_\star$ (used to build $p_\star$ in Appendix G). |
 
 ## Conventions and data format
