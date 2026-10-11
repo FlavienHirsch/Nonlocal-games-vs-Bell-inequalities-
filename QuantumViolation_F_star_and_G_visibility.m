@@ -1,12 +1,5 @@
 %% Construct a simple violation of F_\star^1 and F_\star^2
 
-%Scenario 
-
-Inputs = [2 2]
-
-Outputs = [4 4]
-
-
 
 %Pauli matrices:
 
@@ -82,7 +75,7 @@ pT = vis*pQ+(1-vis)*pN; %pT = vis*pQ + (1-vis)*1/N*sum_k V_k , where V_k are ver
 [cStar,G] = MILP_max_gap_Game_pT_canonicalLP(pT);  %compute the max violation of pT over all (deterministic) nonlocal games
 
 
-gap_pT = cStar  %if >10^-8 one can check that pT violates a (deterministic) nonlocal games, otherwise, pT is likely in G (the set of game-classical behaviours) 
+gap_pT = cStar  %if 'gap_pT' > 10^-7 one can check that pT violates a (deterministic) nonlocal games, otherwise, pT is likely in G (the set of game-classical behaviours) 
 
 
 
