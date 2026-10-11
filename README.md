@@ -19,7 +19,7 @@ This repository provides:
 
 ## Requirements
 
-- MATLAB (tested on R20XXx)
+- MATLAB (tested on R2023b)
 - [YALMIP](https://yalmip.github.io/)
 - [MOSEK](https://www.mosek.com/) (free academic licence available); any MILP solver supported by YALMIP should work after changing `'solver','mosek'` in `sdpsettings`.
 
