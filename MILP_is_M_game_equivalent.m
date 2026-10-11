@@ -97,7 +97,7 @@ R = R + ( G(:) >= mu_clone(:) - (1-V(:)) ) + ( mu_clone(:) + (1-V(:)) >= G(:) ) 
 
 ops=sdpsettings('verbose',1,'warning',1,'solver','mosek');
 
-solvesdp(R,-c,ops);
+optimize(R,-c,ops);
 
 
 cStar = double(c);
