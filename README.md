@@ -13,7 +13,8 @@ This repository provides:
 1. a MILP that decides whether a Bell functional is equivalent to a nonlocal game (up to positive scaling, block shifts and no-signalling transformations) — Appendix B;
 2. a MILP that computes the maximal quantum-to-classical gap of a behaviour over all nonlocal games, i.e. tests membership in the game-classical polytope $\mathcal{G}$ — Eq. (11) and Appendix G;
 3. explicit game representations of all game-equivalent facets of the local polytope in $(4,4,2,2)$ (173 of 174 classes) and $(2,2,4,4)$ (31 of 33 known classes);
-4. the script reproducing the critical $\mathcal{G}$-visibility computation of Appendix G.
+4. the three game-inequivalent facets $J_\star$ (in $(4,4,2,2)$), $F^1_\star$ and $F^2_\star$ (in $(2,2,4,4)$), and a nonlocal-game representative of $J_\star$ after input lifting to $(5,5,2,2)$;
+5. the script reproducing the critical $\mathcal{G}$-visibility computation of Appendix G.
 
 ---
 
@@ -34,6 +35,9 @@ This repository provides:
 | `Game_representation_173_FacetInequalities_4422.mat` | A nonlocal-game representative $(\mu, V)$ for each of them. |
 | `List_of_31_FacetInequalities_2244_pfull.mat` | The 31 game-equivalent facet classes of $(2,2,4,4)$, full-probability notation. |
 | `Game_representation_31_FacetInequalities_2244.mat` | A nonlocal-game representative $(\mu, V)$ for each of them. |
+| `Jstar.mat` | The game-inequivalent facet $J_\star$ of $(4,4,2,2)$ (Eqs. (7), (C1)). |
+| `F_star_1.mat`, `F_star_2.mat` | The game-inequivalent facets $F^1_\star$, $F^2_\star$ of $(2,2,4,4)$ (Eqs. (8)–(9), (D1)–(D2)). |
+| `Lifted_F_star_game_5522.mat` | A nonlocal game $(\mu, V)$ in $(5,5,2,2)$ equivalent to the input-lifted $J_\star$. |
 | `Vertices_F_star_1.mat` | The 56 local deterministic behaviours saturating $F^1_\star$ (used to build $p_\star$ in Appendix G). |
 
 ## Conventions and data format
@@ -55,6 +59,15 @@ M   = permute(reshape(row, [ob oa ny nx]), [2 1 4 3]);   % M(a,b,x,y)
 - `mu{i}`: `nx × ny` prior. For $(2,2,4,4)$ it is normalised; for $(4,4,2,2)$ it is given up to normalisation (and some entries are stored as `uint8`), so use `mu = double(mu)/sum(double(mu(:)))`.
 
 They satisfy $\mu(x,y)V(a,b|x,y) = c\,M_{ab|xy} + r_{a|x}(y) + s_{b|y}(x) + d_{xy}$ with $c>0$, $\sum_y r_{a|x}(y) = 0$, $\sum_x s_{b|y}(x) = 0$ (Definition 3 and Eq. (A9)).
+
+**Game-inequivalent facets.** `Jstar` (`2 × 2 × 4 × 4`), `F_star_1` and `F_star_2` (`4 × 4 × 2 × 2`), `int16`, indexed `M(a,b,x,y)`. They differ from the matrices printed in Eqs. (C1), (D1), (D2) by a block shift of $+1$ on the $(x,y) = (0,0)$ block, so their local bounds are shifted accordingly:
+
+| Variable | Stored inequality | Paper's form |
+|---|---|---|
+| `Jstar` | $\langle J_\star, p\rangle \le 2$ | $\le 1$ |
+| `F_star_1`, `F_star_2` | $\langle F^i_\star, p\rangle \le 1$ | $\le 0$ |
+
+**Lifted game in $(5,5,2,2)$.** `V` (`2 × 2 × 5 × 5`, 0/1) and `mu` (`5 × 5`, normalised). The game $\mu(x,y)V(a,b|x,y)$ is equivalent, in the sense of Definition 3, to $J_\star$ lifted to five inputs per party (zero coefficients for the fifth inputs `x = 5`, `y = 5`). Note that the variables are named `V` and `mu`: load them into a struct (`S = load(...)`) to avoid overwriting other variables.
 
 **Vertices.** `Vertices_F_star1` is `4 × 4 × 2 × 2 × 56` (`uint8`); `Vertices_F_star1(:,:,:,:,k)` is the $k$-th deterministic behaviour saturating $F^1_\star$.
 
@@ -82,7 +95,6 @@ The number of local deterministic strategies is `oa^nx * ob^ny`, so this becomes
 **Reproduce the $\mathcal{G}$-visibility of Appendix G.**
 
 ```matlab
-load('Vertices_F_star_1.mat');
 QuantumViolation_F_star_and_G_visibility
 ```
 
