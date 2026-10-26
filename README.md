@@ -13,7 +13,7 @@ This repository provides:
 1. a MILP that decides whether a Bell functional is equivalent to a nonlocal game (up to positive scaling, block shifts and no-signalling transformations) — Appendix B;
 2. a MILP that computes the maximal quantum-to-classical gap of a behaviour over all nonlocal games, i.e. tests membership in the game-classical polytope $\mathcal{G}$ — Eq. (11) and Appendix G;
 3. explicit game representations of all game-equivalent facets of the local polytope in $(4,4,2,2)$ (173 of 174 classes) and $(2,2,4,4)$ (31 of 33 known classes);
-4. the three game-inequivalent facets $J_\star$ (in $(4,4,2,2)$), $F^1_\star$ and $F^2_\star$ (in $(2,2,4,4)$), and a nonlocal-game representative of $J_\star$ after input lifting to $(5,5,2,2)$;
+4. the three game-inequivalent facets $J_\star$ (in $(4,4,2,2)$ ), $F^1_\star$ and $F^2_\star$ (in $(2,2,4,4)$), and a nonlocal-game representative of $J_\star$ after input lifting to $(5,5,2,2)$;
 5. the script reproducing the critical $\mathcal{G}$-visibility computation of Appendix G.
 
 ---
